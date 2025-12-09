@@ -72,5 +72,10 @@ Additional tuning sections: PvP/combat-tag, spectator (AutoCam), fight radar, pr
 - Build: `mvn clean package` -> jar is placed in `target/`.
 - No hard compile-time deps except Paper API; ProtocolLib is used dynamically if present at runtime.
 
+## Language
+- Set `language: de` (default) or `language: en` in `config.yml`.
+- Optional: start from the English-commented sample `config_en.yml`.
+- Player-facing texts (join/help/info) use `lang/messages_<code>.yml`; add your own keys there if you extend messaging.
+
 ## Notes
 Adjust `config.yml` to your event format (border, timings, loot, privacy). Run admin/debug commands only in testing environments.

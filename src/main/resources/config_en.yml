@@ -1,0 +1,119 @@
+language: en              # language for messages (de|en)
+
+border:
+  startSize: 4000
+  endSize: 100
+  shrinkEveryMinutes: 20
+  shrinkLerpSeconds: 30
+  centerX: 0
+  centerZ: 0
+
+project:
+  totalMinutes: 180
+  teamSpreadRadius: 700
+
+nether:
+  limitMinutes: 60
+
+supplydrop:
+  enabled: true
+  intervalMinutes: 30
+  loot:
+    - GOLDEN_APPLE:2
+    - ENDER_PEARL:6
+    - DIAMOND:3
+    - ARROW:32
+    - BREAD:8
+
+  # Mega drop variant (rare, better loot)
+  mega:
+    enabled: true
+    chance: 0.1
+    loot:
+      - NETHERITE_INGOT:1
+      - DIAMOND:8
+      - ENDER_PEARL:8
+
+tracker:
+  cooldownSeconds: 10
+
+pvp:
+  combatTagSeconds: 20
+  rejoinProtectSeconds: 5
+  loggerNpcSeconds: 30
+
+kills:
+  deathMarkerSeconds: 30
+  assist:
+    windowSeconds: 10     # assist window before death
+    minPercent: 0.15      # minimum share of damage for assist (0.15 = 15%)
+    maxShown: 3           # max players shown in assist list
+
+spectator:
+  minDistance: 12
+  autocam:
+    switchSeconds: 8
+    showHint: true
+
+fightradar:
+  lookbackSeconds: 15        # consider PvP within the last N seconds
+  pulseEverySeconds: 3       # how often to send actionbar pulses to GMs
+  maxDistance: 600           # max distance to show from GM
+  showTeamName: true         # show team label instead of player name when possible
+
+lootlama:
+  enabled: false             # loot llama drops (disabled by default)
+  intervalMinutes: 45        # spawn interval
+  radius: 1200               # max distance from center
+  loot:                      # loot on death
+    - DIAMOND:2
+    - GOLDEN_APPLE:1
+    - ENDER_PEARL:2
+
+privacy:
+  maskStreamerCoords: true
+  spectateDelaySeconds: 30
+
+afk:
+  kickMinutes: 5
+
+# HUD tuning
+hud:
+  scoreboardUpdateMs: 4000        # update interval for scoreboard per player
+  borderParticles:
+    intervalMs: 1500              # per-player particle throttle
+    nearDist: 28.0                # only render when player is this close to border edge
+    radius: 18.0                  # max radius around player to render samples
+    step: 4.0                     # sampling step along border in blocks
+
+# AntiCheat mining analytics thresholds
+ac:
+  mining:
+    windowMinutes: 10
+    diamond:
+      perBlocks: 200           # normalize diamonds per N stone-like blocks
+      maxPerWindowRatio: 1.2   # warn if > this per-window ratio
+      fastFindPerWindow: 8     # warn if >= diamonds found within window
+    debris:
+      perBlocks: 100           # normalize debris per N netherrack-like blocks
+      maxPerWindowRatio: 1.5   # warn if > this per-window ratio
+      fastFindPerWindow: 3     # warn if >= debris found within window
+    branch:
+      withinSteps: 3           # ore found within first N blocks of a branch counts
+      warnCountInWindow: 4     # warn if this many branch-ore hits within window
+
+# Performance auto-throttle: reduce HUD/particles when TPS is low
+performance:
+  autoThrottle:
+    enabled: true
+    tpsLow: 17.5
+    tpsRecover: 19.5
+    scale:
+      scoreboardMs: 2.0       # multiply scoreboard update interval
+      borderIntervalMs: 2.0   # multiply border particle interval
+      borderStep: 1.5         # multiply border particle step spacing
+
+# Debug runtime command toggles (false = disabled)
+debug:
+  allowRuntimeShrinkAdjust: false          # allow /debugshrink to adjust shrink interval at runtime
+  allowRuntimeProjectTimeAdjust: false     # allow /debugprojzeit to set remaining project time

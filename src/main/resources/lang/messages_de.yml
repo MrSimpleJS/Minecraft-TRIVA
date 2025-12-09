@@ -1,0 +1,29 @@
+who:
+  header: "Lebende Teams/Spieler:"
+
+title:
+  varoInfo: "TRIVA INFO"
+
+join:
+  role:
+    gm: "GAMEMASTER"
+    streamer: "Streamer"
+    player: "Teilnehmer"
+  message: "ist dem Server beigetreten."
+  freeze: "Du bist gefreezed!"
+  team:
+    create: "Erstelle ein Team mit "
+    invite: "Lade einen Spieler ein mit "
+    accept: "Nimm eine Einladung an mit "
+    ready: "Nutze "
+  rejoinProtect: "Rejoin-Schutz aktiv ({0}s). Du kannst nicht angreifen."
+  spawnProtect: "Kurzzeit-Schutz aktiv (60s)."
+
+info:
+  border: "Border"
+  blocks: "Blöcke"
+  center: "Center"
+  projectTime: "Projektzeit"
+  waiting: "wartet"
+  teams: "Teams"
+  topKiller: "Top-Killer"

@@ -1,3 +1,5 @@
+language: de              # language for messages (de|en)
+
 border:
   startSize: 4000
   endSize: 100

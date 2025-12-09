@@ -1,12 +1,15 @@
 package de.varo.services;
 
+import de.varo.util.Lang;
+import de.varo.util.Messages;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
 public class InfoService {
     private final Map<String, java.util.List<java.util.UUID>> teams;
@@ -33,7 +36,7 @@ public class InfoService {
     }
 
     public void cmdWho(Player sender) {
-        StringBuilder sb = new StringBuilder(ChatColor.GOLD + "Lebende Teams/Spieler:\n");
+        StringBuilder sb = new StringBuilder(ChatColor.GOLD + Lang.tr("who.header") + "\n");
         for (Map.Entry<String, java.util.List<java.util.UUID>> e : teams.entrySet()) {
             String t = e.getKey(); sb.append(ChatColor.YELLOW).append("  ").append(t).append(ChatColor.GRAY).append(": ");
             java.util.List<String> names = new java.util.ArrayList<>();
@@ -53,15 +56,15 @@ public class InfoService {
         boolean mask = privacyMaskCoords.get() && streamers.contains(p.getUniqueId());
         String centerStr = mask ? (ChatColor.DARK_GRAY + "X:??? Z:???")
                 : (ChatColor.WHITE + "" + (int)wb.getCenter().getX() + ChatColor.GRAY + "," + ChatColor.WHITE + (int)wb.getCenter().getZ());
-    p.sendMessage(ChatColor.GOLD + "—— TRIVA INFO ——");
-        p.sendMessage(ChatColor.YELLOW + "Border: " + ChatColor.WHITE + (int)wb.getSize() + " Blöcke" + ChatColor.GRAY + "  Center: " + centerStr);
-        p.sendMessage(ChatColor.YELLOW + "Projektzeit: " + ChatColor.WHITE + (isGameRunning.get() ? formatTime(getProjectRemainingMs.get()) : "wartet"));
-        p.sendMessage(ChatColor.YELLOW + "Teams: " + ChatColor.WHITE + teams.size());
+        p.sendMessage(Messages.title("title.varoInfo"));
+        p.sendMessage(ChatColor.YELLOW + Lang.tr("info.border") + ": " + ChatColor.WHITE + (int)wb.getSize() + " " + Lang.tr("info.blocks") + ChatColor.GRAY + "  " + Lang.tr("info.center") + ": " + centerStr);
+        p.sendMessage(ChatColor.YELLOW + Lang.tr("info.projectTime") + ": " + ChatColor.WHITE + (isGameRunning.get() ? formatTime(getProjectRemainingMs.get()) : Lang.tr("info.waiting")));
+        p.sendMessage(ChatColor.YELLOW + Lang.tr("info.teams") + ": " + ChatColor.WHITE + teams.size());
         if (!playerKills.isEmpty()) {
             java.util.UUID topId = null; int max = 0;
             for (Map.Entry<java.util.UUID,Integer> en : playerKills.entrySet()) if (en.getValue() > max) { max=en.getValue(); topId=en.getKey(); }
             String nm = topId!=null ? java.util.Objects.toString(Bukkit.getOfflinePlayer(topId).getName(),"Spieler") : "-";
-            p.sendMessage(ChatColor.YELLOW + "Top-Killer: " + ChatColor.GOLD + nm + ChatColor.GRAY + " ("+max+")");
+            p.sendMessage(ChatColor.YELLOW + Lang.tr("info.topKiller") + ": " + ChatColor.GOLD + nm + ChatColor.GRAY + " ("+max+")");
         }
     }
 

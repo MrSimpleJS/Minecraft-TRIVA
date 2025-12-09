@@ -1,5 +1,6 @@
 package de.varo.services;
 
+import de.varo.util.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -67,10 +68,10 @@ public class JoinFlowService implements Listener {
         Player p = e.getPlayer();
         // Custom join message by role
         String roleLabel; org.bukkit.ChatColor roleColor;
-        if (gameMasters.contains(p.getUniqueId()) || p.isOp()) { roleLabel = "GAMEMASTER"; roleColor = org.bukkit.ChatColor.RED; }
-        else if (streamers.contains(p.getUniqueId())) { roleLabel = "Streamer"; roleColor = org.bukkit.ChatColor.LIGHT_PURPLE; }
-        else { roleLabel = "Teilnehmer"; roleColor = org.bukkit.ChatColor.YELLOW; }
-        String joinMsg = roleColor + roleLabel + org.bukkit.ChatColor.GRAY + " \"" + org.bukkit.ChatColor.WHITE + p.getName() + org.bukkit.ChatColor.GRAY + "\" ist dem Server beigetreten.";
+        if (gameMasters.contains(p.getUniqueId()) || p.isOp()) { roleLabel = Lang.tr("join.role.gm"); roleColor = org.bukkit.ChatColor.RED; }
+        else if (streamers.contains(p.getUniqueId())) { roleLabel = Lang.tr("join.role.streamer"); roleColor = org.bukkit.ChatColor.LIGHT_PURPLE; }
+        else { roleLabel = Lang.tr("join.role.player"); roleColor = org.bukkit.ChatColor.YELLOW; }
+        String joinMsg = roleColor + roleLabel + org.bukkit.ChatColor.GRAY + " \"" + org.bukkit.ChatColor.WHITE + p.getName() + org.bukkit.ChatColor.GRAY + "\" " + Lang.tr("join.message");
         e.setJoinMessage(joinMsg);
 
         if (!isGameRunning.get()) handlePreGameJoin(p); else handleActiveGameJoin(p);
@@ -112,14 +113,14 @@ public class JoinFlowService implements Listener {
         if (!p.getWorld().equals(w) || p.getLocation().distanceSquared(center) > 9.0) p.teleport(center);
         if (!gameMasters.contains(p.getUniqueId())) {
             freezePlayer.accept(p);
-            p.sendMessage(org.bukkit.ChatColor.AQUA + "Du bist gefreezed!");
+            p.sendMessage(org.bukkit.ChatColor.AQUA + Lang.tr("join.freeze"));
         } else {
             try { p.setAllowFlight(true); p.setFlying(true); } catch (Throwable ignored) {}
         }
-        p.sendMessage(org.bukkit.ChatColor.AQUA + "Erstelle ein Team mit " + org.bukkit.ChatColor.YELLOW + "/team create <Name>");
-        p.sendMessage(org.bukkit.ChatColor.AQUA + "Lade einen Spieler ein mit " + org.bukkit.ChatColor.YELLOW + "/team invite <Spieler>");
-        p.sendMessage(org.bukkit.ChatColor.AQUA + "Nimm eine Einladung an mit " + org.bukkit.ChatColor.YELLOW + "/team accept <Teamname|Spielername>");
-        p.sendMessage(org.bukkit.ChatColor.AQUA + "Nutze " + org.bukkit.ChatColor.YELLOW + "/teamfertig" + org.bukkit.ChatColor.AQUA + ", wenn ihr bereit seid.");
+        p.sendMessage(org.bukkit.ChatColor.AQUA + Lang.tr("join.team.create") + org.bukkit.ChatColor.YELLOW + "/team create <Name>");
+        p.sendMessage(org.bukkit.ChatColor.AQUA + Lang.tr("join.team.invite") + org.bukkit.ChatColor.YELLOW + "/team invite <Spieler>");
+        p.sendMessage(org.bukkit.ChatColor.AQUA + Lang.tr("join.team.accept") + org.bukkit.ChatColor.YELLOW + "/team accept <Teamname|Spielername>");
+        p.sendMessage(org.bukkit.ChatColor.AQUA + Lang.tr("join.team.ready") + org.bukkit.ChatColor.YELLOW + "/teamfertig" + org.bukkit.ChatColor.AQUA + ".");
     }
 
     private void handleActiveGameJoin(Player p) {
@@ -129,10 +130,10 @@ public class JoinFlowService implements Listener {
             rejoinProtectionUntil.put(p.getUniqueId(), until);
             p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, (int)(rejoinProtectMs/50), 0, true, false, false));
             p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, (int)(rejoinProtectMs/50), 4, true, false, false));
-            p.sendMessage(org.bukkit.ChatColor.YELLOW + "Rejoin-Schutz aktiv (" + (rejoinProtectMs/1000) + "s). Du kannst nicht angreifen.");
+            p.sendMessage(org.bukkit.ChatColor.YELLOW + Lang.tr("join.rejoinProtect", (rejoinProtectMs/1000)));
         } else {
             spawnProtectionUntil.put(p.getUniqueId(), System.currentTimeMillis() + 60_000L);
-            p.sendMessage(org.bukkit.ChatColor.GREEN + "Kurzzeit-Schutz aktiv (60s).");
+            p.sendMessage(org.bukkit.ChatColor.GREEN + Lang.tr("join.spawnProtect"));
         }
     }
 }

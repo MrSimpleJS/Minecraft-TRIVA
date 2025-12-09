@@ -49,6 +49,7 @@ import org.bukkit.NamespacedKey;
 
 import java.io.File;
 import java.util.*;
+import de.varo.util.Lang;
 import de.varo.util.Messages;
 import de.varo.util.TabNameFormatter;
 
@@ -124,6 +125,7 @@ public class VaroPlugin extends JavaPlugin implements Listener {
     // spectatorMinDistance no longer used
     private long afkKickMs;
     private long shrinkIntervalMs;
+    private String language = "de";
     // HUD tuning
     private long hudScoreboardUpdateMs;
     private long hudBorderParticleIntervalMs;
@@ -260,10 +262,13 @@ public class VaroPlugin extends JavaPlugin implements Listener {
     public void onEnable() {
         try {
             saveDefaultConfig();
+            try { saveResource("lang/messages_de.yml", false); } catch (Throwable ignored) {}
+            try { saveResource("lang/messages_en.yml", false); } catch (Throwable ignored) {}
             // Modularized config/state loading
         de.varo.services.ConfigService cfgSvc = new de.varo.services.ConfigService();
         de.varo.services.ConfigService.ConfigValues cfgVals = cfgSvc.load(this);
             applyConfig(cfgVals);
+            Lang.load(this, language);
 
         stateService = new de.varo.services.StateService();
         stateService.init(this);
@@ -694,6 +699,7 @@ public class VaroPlugin extends JavaPlugin implements Listener {
         // Privacy/Streamer
         privacyMaskCoords = v.privacyMaskCoords;
         spectateDelaySeconds = v.spectateDelaySeconds;
+        language = v.language;
 
         // AntiCheat mining thresholds
         acWindowMinutes = v.acWindowMinutes;

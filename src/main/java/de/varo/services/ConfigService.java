@@ -73,6 +73,9 @@ public class ConfigService {
         // Whitelist
         public long wlCodeTtlMs;
 
+        // Language
+        public String language;
+
         // Keys
         public NamespacedKey trackerKey;
         public NamespacedKey specteamTeamKey;
@@ -166,6 +169,13 @@ public class ConfigService {
 
         // Whitelist
         v.wlCodeTtlMs = cfg.getInt("whitelist.codeTtlMinutes", 60) * 60_000L;
+
+        // Language
+        try {
+            v.language = cfg.getString("language", "de");
+        } catch (Throwable ignored) {
+            v.language = "de";
+        }
 
         // Keys
         v.trackerKey = new NamespacedKey(plugin, "player_tracker");
