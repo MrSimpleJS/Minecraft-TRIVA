@@ -1,0 +1,188 @@
+name: TRIVA
+main: de.varo.VaroPlugin
+version: 1.0.1
+api-version: 1.21
+authors: ["Simple"]
+description: TRIVA Projekt Plugin
+
+commands:
+  varo:
+    description: Info Übersicht
+    usage: /varo
+    aliases: [triva]
+  team:
+    description: Team verwalten
+    usage: /team <create|invite|accept>
+  fertig:
+    description: Startet TRIVA wenn alle Teams bereit sind
+    usage: /fertig
+  pausevaro:
+    description: Pausiert oder setzt TRIVA fort
+    usage: /pausevaro
+    aliases: [pausetriva]
+  help:
+    description: Kurz-Hilfe
+    usage: /help
+    aliases: [hilfe]
+  gm:
+    description: Toggle GM-Modus
+    usage: /gm
+  tpmenu:
+    description: GM Teleport-Menue
+    usage: /tpmenu
+  teamfertig:
+    description: Team fertig melden
+    usage: /teamfertig
+  netherreset:
+    description: Setzt Nether-Zeit eines Spielers
+    usage: /netherreset <Spieler> [Minuten]
+  resetvaro:
+    description: Setzt alles zurück
+    usage: /resetvaro
+    aliases: [resettriva]
+  who:
+    description: Zeigt lebende Teams/Spieler
+    usage: /who
+    aliases: [alive]
+  setcenter:
+    description: Setzt Border-Mitte (Start-Sperre bis gesetzt)
+    usage: /setcenter [x] [z]
+  streamer:
+    description: Markiert Streamer
+    usage: /streamer <add|remove|list> <Spieler>
+  tracker:
+    description: Gibt einen (inaktiven) Spieler-Tracker
+    usage: /tracker
+  supplydrop:
+    description: Erzwingt einen Supply Drop
+    usage: /supplydrop
+  dropcoords:
+    description: Zeigt dir die Koordinaten des letzten Supply Drops
+    usage: /dropcoords
+  specteam:
+    description: Spectator-Team-GUI
+    usage: /specteam [Team]
+  poi:
+    description: Zuschauer-POIs (Drop/Kampf/Border)
+    usage: /poi
+  poitp:
+    description: Interner TP-Befehl für /poi Buttons
+    usage: /poitp <drop|fight|border|at|atw> [index|x y z|world x y z]
+  autocam:
+    description: Zuschauer-AutoCam zu aktiven Kämpfen umschalten
+    usage: /autocam
+  fightradar:
+    description: GM Fight-Radar (Actionbar Pulse bei frischem PvP)
+    usage: /fightradar
+  lagreport:
+    description: Zeigt TPS/MSPT und Auto-Drossel-Status
+    usage: /lagreport
+  lootlama:
+    description: Loot-Lama steuern (spawn)
+    usage: /lootlama spawn
+  logs:
+    description: Zeigt die Aktivitaets-Logs (nur Admin)
+    usage: /logs [anzahl]
+  hud:
+    description: Zeigt oder versteckt den Border-HUD-Pfeil
+    usage: /hud
+  hudset:
+    description: HUD-Parameter live anpassen (Admin)
+    usage: /hudset <key> <value> | /hudset dump
+  debugshrink:
+    description: "Debug: Border-Shrink-Intervall live setzen (Admin)"
+    usage: /debugshrink <minuten>
+  debugprojzeit:
+    description: "Debug: Projekt-Restzeit anpassen (Admin)"
+    usage: /debugprojzeit <minuten>
+  miningstats:
+    description: Zeigt Mining-Statistiken eines Spielers (GM)
+    usage: /miningstats [Spieler]
+  review:
+    description: Review-GUI/Infos eines Spielers (GM)
+    usage: /review <Spieler>
+  report:
+    description: Meldet einen Spieler an die Admins
+    usage: /report <Spieler> [Grund]
+  announce:
+    description: Sendet eine Admin-Announcement an alle
+    usage: /announce <Nachricht>
+  pregen:
+    description: Generiert Chunks rund um die Mitte vor (Admin)
+    usage: /pregen [radiusChunks]
+  acset:
+    description: AntiCheat-Schwellen live anpassen (Admin)
+    usage: /acset <key> <value> | /acset dump
+  acprofile:
+    description: AntiCheat-Profile speichern/laden (Admin)
+    usage: /acprofile <save|load|list> <name>
+  sc:
+    description: Staffchat an/aus (Staff)
+    usage: /sc
+  stschutz:
+    description: Streamer-Schutz toggeln (Koordinaten/Meta-Schutz)
+    usage: /stschutz
+  mute:
+    description: Spieler muten (Staff)
+    usage: /mute <Spieler> <Minuten>
+  unmute:
+    description: Spieler entmuten (Staff)
+    usage: /unmute <Spieler>
+  warn:
+    description: Spieler verwarnen (Staff)
+    usage: /warn <Spieler> <Grund>
+  vanish:
+    description: Vanish an/aus (Staff)
+    usage: /vanish
+  freeze:
+    description: Spieler einfrieren/entfrieren (Staff)
+    usage: /freeze <Spieler>
+  inspect:
+    description: Inventar eines Spielers ansehen (Staff)
+    usage: /inspect <Spieler>
+  rq:
+    description: Reports-Queue öffnen (Staff)
+    usage: /rq
+  schedule:
+    description: Zeigt Scheduler-Info; Zeiten in scheduler.yml
+    usage: /schedule
+  tpl:
+    description: Silent-TP zu einem Spieler (Staff)
+    usage: /tpl <Spieler>
+  tpsafe:
+    description: GM-TP sicher in die Nähe von Koordinaten
+    usage: /tpsafe <x> <z> [radius]
+  areafreeze:
+    description: Spieler in einem Radius einfrieren (GM)
+    usage: /areafreeze <x> <z> <radius>
+  wlcode:
+    description: Spieler per Code freischalten (Admin/GM)
+    usage: /wlcode <CODE>
+  wllist:
+    description: Offene Whitelist-Codes anzeigen (Admin/GM)
+    usage: /wllist
+  wldel:
+    description: Whitelist-Code löschen (Admin/GM)
+    usage: /wldel <CODE|Spieler>
+  summary:
+    description: Zeigt Abschluss-Stats und exportiert sie (Admin)
+    usage: /summary [filename]
+  regeln:
+    description: Zeigt die wichtigen Projektregeln
+    usage: /regeln
+    aliases: [rules]
+  rulesaccept:
+    description: Akzeptiert die Projektregeln
+    usage: /rulesaccept
+  debugfaketeams:
+    description: Erstellt Dummy-Teams mit Fake-Spielern (Debug)
+    usage: /debugfaketeams <teamCount> <membersProTeam>
+  debugcleardummys:
+    description: Entfernt bewegte Debug-Dummys
+    usage: /debugcleardummys
+  debugspecdummy:
+    description: Spectate einen Dummy (Name-Teil)
+    usage: /debugspecdummy <nameTeil>
+  debugnpcteams:
+    description: Erstellt Fake-Teams mit NPC-Dummys (aktuell ohne echte Sichtbarkeit)
+    usage: /debugnpcteams <teams> <members>
